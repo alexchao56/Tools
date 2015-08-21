@@ -89,27 +89,29 @@ That's it, you have a running Docker container.
 
 ### Lifecycle
 
-* [`docker create`](http://docs.docker.io/reference/commandline/cli/#create) creates a container but does not start it.
-* [`docker run`](http://docs.docker.io/reference/commandline/cli/#run) creates and starts a container in one operation.
-* [`docker stop`](http://docs.docker.io/reference/commandline/cli/#stop) stops it.
-* [`docker start`](http://docs.docker.io/reference/commandline/cli/#start) will start it again.
-* [`docker restart`](http://docs.docker.io/reference/commandline/cli/#restart) restarts a container.
-* [`docker rm`](http://docs.docker.io/reference/commandline/cli/#rm) deletes a container.
-* [`docker kill`](http://docs.docker.io/reference/commandline/cli/#kill) sends a SIGKILL to a container.
-* [`docker attach`](http://docs.docker.io/reference/commandline/cli/#attach) will connect to a running container.
-* [`docker wait`](http://docs.docker.io/reference/commandline/cli/#wait) blocks until container stops.
+* [`docker create`](https://docs.docker.com/reference/commandline/create) creates a container but does not start it.
+* [`docker run`](https://docs.docker.com/reference/commandline/run) creates and starts a container in one operation.
+* [`docker stop`](https://docs.docker.com/reference/commandline/stop) stops it.
+* [`docker start`](https://docs.docker.com/reference/commandline/start) will start it again.
+* [`docker restart`](https://docs.docker.com/reference/commandline/restart) restarts a container.
+* [`docker rm`](https://docs.docker.com/reference/commandline/rm) deletes a container.
+* [`docker kill`](https://docs.docker.com/reference/commandline/kill) sends a SIGKILL to a container.
+* [`docker attach`](https://docs.docker.com/reference/commandline/attach) will connect to a running container.
+* [`docker wait`](https://docs.docker.com/reference/commandline/wait) blocks until container stops.
 
 If you want to run and then interact with a container, `docker start`, then spawn a shell as described in [Executing Commands](https://github.com/wsargent/docker-cheat-sheet/#executing-commands).
 
 If you want a transient container, `docker run --rm` will remove the container after it stops.
 
-If you want to remove also the volumes associated with the container, the deletion of the container must include the -v switch like in `docker rm -v`.
+If you want to remove also the volumes associated with the container, the deletion of the container must include the -v switch like in `docker --rm -v`.
 
 If you want to poke around in an image, `docker run -t -i <myimage> <myshell>` to open a tty.
 
+If you want to poke around in a running container, `docker exec -t -i <mycontainer> <myshell>` to open a tty.
+
 If you want to map a directory on the host to a docker container, `docker run -v $HOSTDIR:$DOCKERDIR`.  Also see [Volumes](https://github.com/wsargent/docker-cheat-sheet/#volumes).
 
-If you want to integrate a container with a [host process manager](http://docs.docker.io/use/host_integration/), start the daemon with `-r=false` then use `docker start -a`.
+If you want to integrate a container with a [host process manager](https://docs.docker.com/articles/host_integration/), start the daemon with `-r=false` then use `docker start -a`.
 
 If you want to expose container ports through the host, see the [exposing ports](#exposing-ports) section.
 
@@ -117,14 +119,14 @@ Restart policies on crashed docker instances are [covered here](http://container
 
 ### Info
 
-* [`docker ps`](http://docs.docker.io/reference/commandline/cli/#ps) shows running containers.
-* [`docker inspect`](http://docs.docker.io/reference/commandline/cli/#inspect) looks at all the info on a container (including IP address).
-* [`docker logs`](http://docs.docker.io/reference/commandline/cli/#logs) gets logs from container.
-* [`docker events`](http://docs.docker.io/reference/commandline/cli/#events) gets events from container.
-* [`docker port`](http://docs.docker.io/reference/commandline/cli/#port) shows public facing port of container.
-* [`docker top`](http://docs.docker.io/reference/commandline/cli/#top) shows running processes in container.
-* [`docker stats`](http://docs.docker.com/reference/commandline/cli/#stats) shows containers' resource usage statistics.
-* [`docker diff`](http://docs.docker.io/reference/commandline/cli/#diff) shows changed files in the container's FS.
+* [`docker ps`](https://docs.docker.com/reference/commandline/ps) shows running containers.
+* [`docker logs`](https://docs.docker.com/reference/commandline/logs) gets logs from container.
+* [`docker inspect`](https://docs.docker.com/reference/commandline/inspect) looks at all the info on a container (including IP address).
+* [`docker events`](https://docs.docker.com/reference/commandline/events) gets events from container.
+* [`docker port`](https://docs.docker.com/reference/commandline/port) shows public facing port of container.
+* [`docker top`](https://docs.docker.com/reference/commandline/top) shows running processes in container.
+* [`docker stats`](https://docs.docker.com/reference/commandline/stats) shows containers' resource usage statistics.
+* [`docker diff`](https://docs.docker.com/reference/commandline/diff) shows changed files in the container's FS.
 
 `docker ps -a` shows running and stopped containers.
 
@@ -132,12 +134,12 @@ Restart policies on crashed docker instances are [covered here](http://container
 
 There doesn't seem to be a way to use docker directly to import files into a container's filesystem.  The closest thing is to mount a host file or directory as a data volume and copy it from inside the container.
 
-* [`docker cp`](http://docs.docker.io/reference/commandline/cli/#cp) copies files or folders out of a container's filesystem.
-* [`docker export`](http://docs.docker.io/reference/commandline/cli/#export) turns container filesystem into tarball archive stream to STDOUT.
+* [`docker cp`](http://docs.docker.com/reference/commandline/cp) copies files or folders out of a container's filesystem.
+* [`docker export`](https://docs.docker.com/reference/commandline/export) turns container filesystem into tarball archive stream to STDOUT.
 
 ### Executing Commands
 
-* [`docker exec`](https://docs.docker.com/reference/commandline/cli/#exec) to execute a command in container.
+* [`docker exec`](https://docs.docker.com/reference/commandline/exec) to execute a command in container.
 
 To enter a running container, attach a new shell process to a running container called foo, use: `docker exec -it foo /bin/bash`.
 
@@ -147,19 +149,19 @@ Images are just [templates for docker containers](https://docs.docker.com/introd
 
 ### Lifecycle
 
-* [`docker images`](http://docs.docker.io/reference/commandline/cli/#images) shows all images.
-* [`docker import`](http://docs.docker.io/reference/commandline/cli/#import) creates an image from a tarball.
-* [`docker build`](http://docs.docker.io/reference/commandline/cli/#build) creates image from Dockerfile.
-* [`docker commit`](http://docs.docker.io/reference/commandline/cli/#commit) creates image from a container.
-* [`docker rmi`](http://docs.docker.io/reference/commandline/cli/#rmi) removes an image.
-* [`docker insert`](http://docs.docker.io/reference/commandline/cli/#insert) inserts a file from URL into image. (kind of odd, you'd think images would be immutable after create)
-* [`docker load`](http://docs.docker.io/reference/commandline/cli/#load) loads an image from a tar archive as STDIN, including images and tags (as of 0.7).
-* [`docker save`](http://docs.docker.io/reference/commandline/cli/#save) saves an image to a tar archive stream to STDOUT with all parent layers, tags & versions (as of 0.7).
+* [`docker images`](https://docs.docker.com/reference/commandline/images) shows all images.
+* [`docker import`](https://docs.docker.com/reference/commandline/import) creates an image from a tarball.
+* [`docker build`](https://docs.docker.com/reference/commandline/build) creates image from Dockerfile.
+* [`docker commit`](https://docs.docker.com/reference/commandline/commit) creates image from a container.
+* [`docker rmi`](https://docs.docker.com/reference/commandline/rmi) removes an image.
+* [`docker insert`](https://docs.docker.com/reference/commandline/insert) inserts a file from URL into image. (kind of odd, you'd think images would be immutable after create)
+* [`docker load`](https://docs.docker.com/reference/commandline/load) loads an image from a tar archive as STDIN, including images and tags (as of 0.7).
+* [`docker save`](https://docs.docker.com/reference/commandline/save) saves an image to a tar archive stream to STDOUT with all parent layers, tags & versions (as of 0.7).
 
 ### Info
 
-* [`docker history`](http://docs.docker.io/reference/commandline/cli/#history) shows history of image.
-* [`docker tag`](http://docs.docker.io/reference/commandline/cli/#tag) tags an image to a name (local or registry).
+* [`docker history`](https://docs.docker.com/reference/commandline/history) shows history of image.
+* [`docker tag`](https://docs.docker.com/reference/commandline/tag) tags an image to a name (local or registry).
 
 Docker image ids are [sensitive information](https://medium.com/@quayio/your-docker-image-ids-are-secrets-and-its-time-you-treated-them-that-way-f55e9f14c1a4) and should not be exposed to the outside world.  Treat them like passwords.
 
@@ -167,14 +169,14 @@ Docker image ids are [sensitive information](https://medium.com/@quayio/your-doc
 
 A repository is a *hosted* collection of tagged images that together create the file system for a container.
 
-A registry is a *host* -- a server that stores repositories and provides an HTTP API for [managing the uploading and downloading of repositories](http://docs.docker.io/use/workingwithrepository/).
+A registry is a *host* -- a server that stores repositories and provides an HTTP API for [managing the uploading and downloading of repositories](https://docs.docker.com/userguide/dockerrepos/).
 
-Docker.io hosts its own [index](https://index.docker.io/) to a central registry which contains a large number of repositories.  Having said that, the central docker registry [does not do a good job of verifying images](https://titanous.com/posts/docker-insecurity) and should be avoided if you're worried about security.
+Docker.com hosts its own [index](https://registry.hub.docker.com/) to a central registry which contains a large number of repositories.  Having said that, the central docker registry [does not do a good job of verifying images](https://titanous.com/posts/docker-insecurity) and should be avoided if you're worried about security.
 
-* [`docker login`](http://docs.docker.io/reference/commandline/cli/#login) to login to a registry.
-* [`docker search`](http://docs.docker.io/reference/commandline/cli/#search) searches registry for image.
-* [`docker pull`](http://docs.docker.io/reference/commandline/cli/#pull) pulls an image from registry to local machine.
-* [`docker push`](http://docs.docker.io/reference/commandline/cli/#push) pushes an image to the registry from local machine.
+* [`docker login`](https://docs.docker.com/reference/commandline/login) to login to a registry.
+* [`docker search`](https://docs.docker.com/reference/commandline/search) searches registry for image.
+* [`docker pull`](https://docs.docker.com/reference/commandline/pull) pulls an image from registry to local machine.
+* [`docker push`](https://docs.docker.com/reference/commandline/push) pushes an image to the registry from local machine.
 
 ### Run local registry
 
@@ -190,19 +192,19 @@ In order to push to this repository tag image with `repositoryHostName:5000/imag
 ### Instructions
 
 * [.dockerignore](https://docs.docker.com/reference/builder/#the-dockerignore-file)
-* [FROM](http://docs.docker.io/reference/builder/#from)
-* [MAINTAINER](http://docs.docker.io/reference/builder/#maintainer)
-* [RUN](http://docs.docker.io/reference/builder/#run)
-* [CMD](http://docs.docker.io/reference/builder/#cmd)
-* [EXPOSE](http://docs.docker.io/reference/builder/#expose)
-* [ENV](http://docs.docker.io/reference/builder/#env)
-* [ADD](http://docs.docker.io/reference/builder/#add)
-* [COPY](http://docs.docker.io/reference/builder/#copy)
-* [ENTRYPOINT](http://docs.docker.io/reference/builder/#entrypoint)
-* [VOLUME](http://docs.docker.io/reference/builder/#volume)
-* [USER](http://docs.docker.io/reference/builder/#user)
-* [WORKDIR](http://docs.docker.io/reference/builder/#workdir)
-* [ONBUILD](http://docs.docker.io/reference/builder/#onbuild)
+* [FROM](https://docs.docker.com/reference/builder/#from)
+* [MAINTAINER](https://docs.docker.com/reference/builder/#maintainer)
+* [RUN](https://docs.docker.com/reference/builder/#run)
+* [CMD](https://docs.docker.com/reference/builder/#cmd)
+* [EXPOSE](https://docs.docker.com/reference/builder/#expose)
+* [ENV](https://docs.docker.com/reference/builder/#env)
+* [ADD](https://docs.docker.com/reference/builder/#add)
+* [COPY](https://docs.docker.com/reference/builder/#copy)
+* [ENTRYPOINT](https://docs.docker.com/reference/builder/#entrypoint)
+* [VOLUME](https://docs.docker.com/reference/builder/#volume)
+* [USER](https://docs.docker.com/reference/builder/#user)
+* [WORKDIR](https://docs.docker.com/reference/builder/#workdir)
+* [ONBUILD](https://docs.docker.com/reference/builder/#onbuild)
 
 ### Tutorial
 
@@ -210,7 +212,7 @@ In order to push to this repository tag image with `repositoryHostName:5000/imag
 
 ### Examples
 
-* [Examples](http://docs.docker.io/reference/builder/#dockerfile-examples)
+* [Examples](https://docs.docker.com/reference/builder/#dockerfile-examples)
 * [Best practices for writing Dockerfiles](https://docs.docker.com/articles/dockerfile_best-practices/)
 * [Michael Crosby](http://crosbymichael.com/) has some more [Dockerfiles best practices](http://crosbymichael.com/dockerfile-best-practices.html) / [take 2](http://crosbymichael.com/dockerfile-best-practices-take-2.html).
 
@@ -233,7 +235,7 @@ Note that if you're using [aufs](http://en.wikipedia.org/wiki/Aufs) as your file
 
 ## Links
 
-Links are how Docker containers talk to each other [through TCP/IP ports](http://docs.docker.io/use/working_with_links_names/).  [Linking into Redis](http://docs.docker.io/use/working_with_links_names/#links-service-discovery-for-docker) and [Atlassian](http://blogs.atlassian.com/2013/11/docker-all-the-things-at-atlassian-automation-and-wiring/) show worked examples.  You can also (in 0.11) resolve [links by hostname](http://docs.docker.io/use/working_with_links_names/#resolving-links-by-name).
+Links are how Docker containers talk to each other [through TCP/IP ports](https://docs.docker.com/userguide/dockerlinks/).  [Linking into Redis](https://docs.docker.com/examples/running_redis_service/) and [Atlassian](http://blogs.atlassian.com/2013/11/docker-all-the-things-at-atlassian-automation-and-wiring/) show worked examples.  You can also (in 0.11) resolve [links by hostname](https://docs.docker.com/userguide/dockerlinks/#updating-the-etchosts-file).
 
 NOTE: If you want containers to ONLY communicate with each other through links, start the docker daemon with `-icc=false` to disable inter process communication.
 
@@ -268,11 +270,13 @@ Docker volumes are [free-floating filesystems](http://docs.docker.com/userguide/
 
 Volumes are useful in situations where you can't use links (which are TCP/IP only).  For instance, if you need to have two docker instances communicate by leaving stuff on the filesystem.
 
-You can mount them in several docker containers at once, using `docker run -volume-from`.
+You can mount them in several docker containers at once, using `docker run --volumes-from`.
 
 Because volumes are isolated filesystems, they are often used to store state from computations between transient containers.  That is, you can have a stateless and transient container run from a recipe, blow it away, and then have a second instance of the transient container pick up from where the last one left off.
 
 See [advanced volumes](http://crosbymichael.com/advanced-docker-volumes.html) for more details.  Container42 is [also helpful](http://container42.com/2014/11/03/docker-indepth-volumes/).
+
+For an easy way to clean abandoned volumes, see [docker-cleanup-volumes](https://github.com/chadoe/docker-cleanup-volumes)
 
 As of 1.3, you can [map MacOS host directories as docker volumes](http://docs.docker.com/userguide/dockervolumes/#mount-a-host-directory-as-a-data-volume) through boot2docker:
 
@@ -295,7 +299,7 @@ The fastest way is to map the container port to the host port (only using localh
 docker run -p 127.0.0.1:$HOSTPORT:$CONTAINERPORT --name CONTAINER -t someimage
 ```
 
-If you don't want to use the `-p` option on the command line, you can persist port forwarding by using [EXPOSE](http://docs.docker.io/reference/builder/#expose):
+If you don't want to use the `-p` option on the command line, you can persist port forwarding by using [EXPOSE](https://docs.docker.com/reference/builder/#expose):
 
 ```
 EXPOSE <CONTAINERPORT>
@@ -368,7 +372,7 @@ cd jq-1.3
 docker inspect `dl` | jq -r '.[0].NetworkSettings.IPAddress'
 ```
 
-or using a [go template](https://docs.docker.com/reference/commandline/cli/#inspect)
+or using a [go template](https://docs.docker.com/reference/commandline/inspect)
 
 ```
 docker inspect -f '{{ .NetworkSettings.IPAddress }}' <container_name>
@@ -447,31 +451,55 @@ ID=$(docker run -d image-name /bin/bash)
 (docker export $ID | gzip -c > image.tgz)
 gzip -dc image.tgz | docker import - flat-image-name
 ```
+
+### Monitor system resource utilization for running containers
+
+To check the CPU, memory and network i/o usage, you can use:
+
+```
+docker stats <container>
+``` 
+
+for a single container or 
+
+```
+docker stats $(docker ps -q)
+```
+
+to monitor all containers on the docker host.
+
 ## Tools
 
-* [Fig](#fig)
+* [Compose](#compose)
 * [Panamax](#panamax)
 * [Vessel](#vessel)
 
-### Fig
+### Compose
 
-[Fig](http://www.fig.sh/) is a helper app that makes it easier to run multiple docker containers on the same host. I would expect it to be used during dev/qa more than in production.
+[Compose](https://github.com/docker/compose) (originally named fig) is a helper app that makes it easier to run multiple docker containers on the same host.
+I would expect it to be used during dev/qa more than in production.
 
-Fig works with a ```fig.yml``` file (default name, use ```-f``` to provide a different filename)  that defines the containers you wish to use with it. Fig will take its project name from the name of the folder containing your yml configuration but you can override that with the ```-p``` parameter.
+Compose works with a YAML file (default name can be ```docker-compose.yml```, use ```-f``` to provide a different filename)  that defines the containers you wish to use with it.
+Compose will take its project name from the name of the folder containing your yml configuration but you can override that with the ```-p``` parameter.
 
-Once I have my config defined, I can use ```fig up -d``` to run it (the ```-d``` runs it as a background task). This will build (if required) start and link any containers.
+Once I have my config defined, I can use ```docker-compose up -d``` to run it (the ```-d``` runs it as a detached task). This will start and link any containers.
 
-You can do everything you do with fig using docker directly but running multiple containers with parameters would require some sort of script if you plan to do it more than once so the yml config of fig and the convenience commands it provides are worth considering.
+You can do everything you do with compose using docker directly but running multiple containers with parameters
+would require some sort of script if you plan to do it more than once so the yml config of compose
+and the convenience commands it provides are worth considering.
 
-Here's an example of setting up a ```fig.yml``` for an app with an apache packaged client container and a tomcat packaged app war:
+Here's an example of setting up a ```docker-compose.yml``` for an app with an apache packaged client container and a tomcat packaged app war:
 
 First, here are the two docker commands to run these containers:
+
 ```
-docker run -p 8080:8080 -v /Users/me/tomcatwork/trial.properties:/usr/share/tomcat6/trial.properties:rw -d me/tcfull 
+docker run -p 8080:8080 -v /Users/me/tomcatwork/trial.properties:/usr/share/tomcat6/trial.properties:rw -d me/tcfull
 docker run -p 80:80 -v /Users/me/dockerwork/localproxy.conf:/etc/apache2/conf-enabled/proxy.conf:rw -d me/afull
 ```
- at this point, I haven't linked the containers - I'm using the proxy.conf to specify the tomcat address.
-my fig.yml looks like this:
+
+At this point, I haven't linked the containers - I'm using the proxy.conf to specify the tomcat address.
+my docker-compose.yml looks like this:
+
 ```
 app:
   image: me/tcfull
@@ -484,24 +512,27 @@ web:
   ports:
     - "80:80"
   volumes:
-    - /Users/me/figwork/proxy.conf:/etc/apache2/conf-enabled/proxy.conf:rw 
+    - /Users/me/figwork/proxy.conf:/etc/apache2/conf-enabled/proxy.conf:rw
   links:
     - app
 ```
+
 As you can see it follows the docker commands with the addition of names for the containers and a links section for the web container, linking it to the app container.
 
 As part of that linking process, docker will copy any environment variables defined in the app container over to the web container, define new environment variables for the address the app container is running at and also add an app entry in the etc/hosts file for the web container. I can modify my proxy conf to address ```http://app:8080``` and fig/docker will take care of the rest.
 
-I can then use commands like ```fig stop``` and ```fig rm``` to stop all my containers and remove them.
+I can then use commands like ```docker-compose stop``` and ```docker-compose rm``` to stop all my containers and remove them.
 NB - docker will [eventually](https://gist.github.com/aanand/9e7ac7185ffd64c1a91a) absorb figs functionality with docker groups and docker up but it looks like they're keeping the yml config so it should be pretty seamless when it happens.
+
 
 #### Troubleshooting
 
-```fig run``` is a useful command for debugging issues. It allows me to startup a named container (and any it links to) and run a one off command. 
+```docker-compose run``` is a useful command for debugging issues. It allows me to startup a named container (and any it links to) and run a one off command. 
 
-This allows me to do things like ```fig run web env``` which will give me a list of all the environment variables that are available on the web container including the ones generated via the link to app. 
+This allows me to do things like ```docker-compose run web env``` which will give me a list of all the environment variables that are available on the web container including the ones generated via the link to app. 
 
-I can also use ```fig run web bash``` to run my web container interactively the way it has been setup by fig with the link to app so I can debug any issues from the command line.
+I can also use ```docker-compose run web bash``` to run my web container interactively the way it has been setup by compose with the link to app so I can debug any issues from the command line.
+
 
 ### Panamax
 
@@ -509,8 +540,9 @@ I can also use ```fig run web bash``` to run my web container interactively the 
 
 Nice web UI, will let you set up and download multiple docker containers.
 
+
 ### Vessel
 
 * [Vessel](http://awvessel.github.io/)
 
-Vessel automates the setup & use of dockerized development environments 
+Vessel automates the setup & use of dockerized development environments.
